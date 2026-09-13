@@ -1,6 +1,7 @@
 using Amazon.DynamoDBv2;
 using Amazon.S3;
 using Amazon.SimpleEmailV2;
+using DocuFlow.Aws.DynamoDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,15 @@ public static class AwsServiceExtensions
         services.AddSingleton<IAmazonDynamoDB>(_ => new AmazonDynamoDBClient(
             new Amazon.Runtime.BasicAWSCredentials("test", "test"),
             new AmazonDynamoDBConfig { ServiceURL = serviceUrl, AuthenticationRegion = region }));
+
+        var inventoryTable =
+    configuration["Aws:InventoryTable"]
+    ?? "docuflow-inventory";
+
+        services.AddSingleton<IDocumentQueryRepository>(provider =>
+            new DocumentQueryRepository(
+                provider.GetRequiredService<IAmazonDynamoDB>(),
+                inventoryTable));
 
         services.AddSingleton<IAmazonSimpleEmailServiceV2>(_ => new AmazonSimpleEmailServiceV2Client(
             new Amazon.Runtime.BasicAWSCredentials("test", "test"),
