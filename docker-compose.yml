@@ -1,8 +1,28 @@
 services:
   floci:
-    image: ghcr.io/hectorvent/floci:latest
-    container_name: docuflow-floci
+    image: floci/floci:latest      
+    container_name: floci
+
     ports:
       - "4566:4566"
+      
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+
     environment:
       FLOCI_AUTH_VALIDATE_SIGNATURES: "true"
+      FLOCI_DOCKER_DOCKER_HOST: unix:///var/run/docker.sock
+      FLOCI_DEFAULT_REGION: us-east-1
+      FLOCI_DEFAULT_ACCOUNT_ID: "123744569099"
+      FLOCI_STORAGE_MODE: persistent
+      FLOCI_SERVICES_DOCKER_NETWORK: floci_default
+
+    networks:
+      - default
+
+    restart: unless-stopped
+
+networks:
+  default:
+    name: floci_default
