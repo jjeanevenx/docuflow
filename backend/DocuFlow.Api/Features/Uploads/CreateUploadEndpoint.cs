@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace DocuFlow.Api.Features.Uploads;
 
 public static class CreateUploadEndpoint
@@ -6,8 +8,8 @@ public static class CreateUploadEndpoint
     {
         endpoints.MapPost("/api/uploads", 
             (CreateUploadRequest request,
-            CreateUploadValidator validator,
-            CreateUploadHandler handler) =>
+            [FromServices] CreateUploadValidator validator,
+            [FromServices] CreateUploadHandler handler) =>
             {
                 var errors = validator.Validate(request);
 
