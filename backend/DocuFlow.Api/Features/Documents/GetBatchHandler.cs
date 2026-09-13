@@ -2,5 +2,10 @@ namespace DocuFlow.Api.Features.Documents;
 
 public sealed class GetBatchHandler
 {
-    // TODO: consultar manifesto e status do lote no DynamoDB.
+
+    public GetBachResponse Handle(string batchId)
+    {
+        // TODO: consultar manifesto e status do lote no DynamoDB.
+        return new GetBachResponse(batchId, "TODO");
+    }
 }

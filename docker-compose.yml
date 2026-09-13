@@ -1,0 +1,8 @@
+services:
+  floci:
+    image: ghcr.io/hectorvent/floci:latest
+    container_name: docuflow-floci
+    ports:
+      - "4566:4566"
+    environment:
+      FLOCI_AUTH_VALIDATE_SIGNATURES: "true"

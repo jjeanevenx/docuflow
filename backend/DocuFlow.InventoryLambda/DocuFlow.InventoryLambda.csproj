@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../DocuFlow.Contracts/DocuFlow.Contracts.csproj" />
+    <ProjectReference Include="../DocuFlow.Aws/DocuFlow.Aws.csproj" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.*" />
+    <PackageReference Include="Amazon.Lambda.SQSEvents" Version="2.*" />
+    <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.*" />
+  </ItemGroup>
+</Project>

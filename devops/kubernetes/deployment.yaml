@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docuflow-api
+  namespace: docuflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docuflow-api
+  template:
+    metadata:
+      labels:
+        app: docuflow-api
+    spec:
+      containers:
+        - name: api
+          image: docuflow-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: Aws__ServiceUrl
+              value: http://host.docker.internal:4566
