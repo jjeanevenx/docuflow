@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<AwsOptions>(builder.Configuration.GetSection("Aws"));
 builder.Services.AddDocuFlowAws(builder.Configuration);
+builder.Services.AddSingleton<CreateUploadValidator>();
 builder.Services.AddScoped<PresignedUrlService>();
 builder.Services.AddScoped<UploadManifestService>();
 builder.Services.AddScoped<CreateUploadHandler>();
